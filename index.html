@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ava Allwardt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+/* Layout: wide landscape page. Hello beside photo; experience and projects side by side; short lists in a row of columns. Stacks on phones. */
+:root {
+  --bg: #fbfbfd;
+  --surface: #f1f2f7;
+  --fg: #16181f;
+  --muted: #5b6072;
+  --rule: #dde0ea;
+  --accent: #2f3f9e;
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12141b; --surface: #1b1e28; --fg: #e8e9ef; --muted: #9aa0b4; --rule: #2a2e3b; --accent: #9fb0ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12141b; --surface: #1b1e28; --fg: #e8e9ef; --muted: #9aa0b4; --rule: #2a2e3b; --accent: #9fb0ff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.page {
+  max-width: 1200px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 72px;
+  display: grid; gap: 48px;
+}
+
+nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--accent); }
+nav .home { color: var(--fg); font-weight: 600; margin-right: auto; }
+
+/* Hello: text on the left, photo on the right */
+.hello { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 48px; align-items: center; }
+.hello h1 { font-family: var(--display); font-weight: 500; font-size: 42px; line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
+.hello p { margin: 0 0 10px; max-width: 80ch; }
+.hello ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; max-width: 90ch; }
+.profiles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.profiles a { font-size: 13.5px; font-weight: 500; text-decoration: none; padding: 4px 14px; border-radius: 999px; border: 1px solid var(--rule); color: var(--fg); }
+.profiles a:hover { border-color: var(--accent); color: var(--accent); }
+.photo { width: 100%; aspect-ratio: 1; border-radius: 10px; object-fit: cover; display: block; background: var(--surface); }
+
+section { display: grid; gap: 18px; align-content: start; scroll-margin-top: 20px; min-width: 0; }
+h2 { font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+
+/* Experience | Projects side by side */
+.main-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+
+.jobs { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.jobs li { display: grid; gap: 1px; }
+.jobs .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; align-items: baseline; }
+.jobs .org { font-family: var(--display); font-size: 19px; font-weight: 500; line-height: 1.3; }
+.jobs .org a { color: var(--fg); text-decoration-color: var(--rule); }
+.jobs .org a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.jobs .role { color: var(--muted); font-size: 14px; }
+.jobs .role b { color: var(--fg); font-weight: 500; }
+.jobs .what { font-size: 14.5px; margin-top: 4px; }
+.when { font-family: var(--mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border-radius: 8px; padding: 14px 16px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 5px; }
+.tile .where { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.tile h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.tile p { margin: 0; font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; margin: 6px 0 0; padding: 0; align-self: end; }
+.chips li { font-size: 11.5px; line-height: 1.5; padding: 1px 9px; border-radius: 999px; border: 1px solid var(--rule); background: var(--bg); color: var(--fg); white-space: nowrap; }
+.skillgroups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 40px; }
+.skillgroups div { display: grid; gap: 8px; align-content: start; }
+.skillgroups .label { font-size: 13px; color: var(--muted); }
+.skillgroups .chips { margin: 0; }
+.skillgroups .chips li { font-size: 13px; padding: 3px 12px; background: var(--surface); border-color: transparent; }
+
+/* Lists in a row */
+.lists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rows li { display: grid; gap: 0; }
+.rows .t { font-weight: 500; font-size: 14.5px; line-height: 1.4; }
+.rows .d { color: var(--muted); font-size: 13.5px; }
+
+h2.sub-h { margin-top: 14px; }
+.addr { font-family: var(--mono); font-size: 14.5px; user-select: all; word-break: break-all; }
+.contact { display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 14px; }
+.contact p { margin: 0; }
+
+@media (max-width: 1000px) {
+  .lists { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .main-row { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 56px; gap: 40px; }
+  nav .home { flex-basis: 100%; }
+  .hello { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .hello .photo { width: 150px; grid-row: 1; }
+  .hello h1 { font-size: 34px; }
+  .tiles, .lists, .skillgroups { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<!--
+  HOW TO EDIT THIS PAGE
+  - All the words you see on the site are in the <body> section below, between tags like <p>...</p>.
+  - Change the text, save, and refresh. You don't need to touch the <style> block.
+  - To add a project, copy one whole <div class="tile">...</div> block and paste it below.
+  - To add an award or activity, copy one <li>...</li> line.
+  - Links look like <a href="https://...">Text</a>. Change the address in quotes to change where it goes.
+  - The photo is the file photo.jpg in the same folder. Replace that file to change the photo.
+-->
+<div class="page">
+
+  <!-- ===== TOP MENU ===== -->
+  <nav>
+    <a class="home" href="#">Ava Allwardt</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#awards">Awards</a>
+    <a href="#activities">Activities</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ===== HELLO ===== -->
+  <div class="hello">
+    <div>
+      <h1>Hi! I'm Ava.</h1>
+      <p>I'm an undergraduate at Stanford studying math and computer science. My interests lie in machine learning, algorithm design, and software development. I love algorithmic reasoning and difficult technical problems.</p>
+      <p>A few things about me:</p>
+      <ul>
+        <li>I lead machine learning research at the <a href="https://www.broadinstitute.org" target="_blank" rel="noopener">Broad Institute of MIT and Harvard</a>.</li>
+        <li>I developed an antibody-ranking algorithm for HIV vaccine development that launched a study published in <a href="https://doi.org/10.1016/j.immuni.2023.07.003" target="_blank" rel="noopener"><i>Immunity</i></a>.</li>
+        <li>I love teaching and have spent 425+ hours tutoring AMC/AIME and computer science on <a href="https://www.wyzant.com/match/tutor/89598031" target="_blank" rel="noopener">Wyzant</a> with a perfect 5.0/5.0 rating.</li>
+        <li>I've trained in classical ballet for 12 years. As a personal project, I developed a <a href="#projects">geometry-based framework for analyzing ballet technique</a>.</li>
+      </ul>
+      <!-- Profile links -->
+      <div class="profiles">
+        <a href="https://www.linkedin.com/in/ava-allwardt-b94610287/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/avaallwardt" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=IyWtjPkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#contact">Email</a>
+      </div>
+    </div>
+    <img class="photo" src="photo.jpg" alt="Ava Allwardt">
+  </div>
+
+  <!-- ===== TECHNICAL SKILLS ===== -->
+  <section id="skills" aria-labelledby="h-skills">
+    <h2 id="h-skills">Technical Skills</h2>
+    <div class="skillgroups">
+      <div><span class="label">Languages</span><ul class="chips"><li>Python</li><li>C++</li><li>Java</li><li>SQL</li><li>JavaScript</li><li>HTML/CSS</li></ul></div>
+      <div><span class="label">Machine learning &amp; data</span><ul class="chips"><li>PyTorch</li><li>TensorFlow</li><li>scikit-learn</li><li>NumPy</li><li>pandas</li><li>Deep learning</li><li>Bayesian modeling</li><li>Computer vision</li><li>Data analysis</li></ul></div>
+      <div><span class="label">Algorithms, math &amp; engineering</span><ul class="chips"><li>Algorithm design</li><li>Data structures</li><li>Graph algorithms</li><li>Optimization</li><li>Probability &amp; statistics</li><li>Linear algebra</li><li>Competitive programming</li><li>Git</li><li>Software development</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE (left) + PROJECTS (right) ===== -->
+  <div class="main-row">
+
+    <section id="experience" aria-labelledby="h-exp">
+      <h2 id="h-exp">Experience</h2>
+      <ul class="jobs">
+        <li>
+          <div class="top"><span class="org"><a href="https://www.broadinstitute.org" target="_blank" rel="noopener">Broad Institute of MIT and Harvard</a></span><span class="when">Jul 2024 – now</span></div>
+          <span class="role"><b>Machine Learning Researcher</b> · Cambridge, MA</span>
+          <span class="what">Established and lead the lab's first machine learning initiatives.</span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://www.wyzant.com/match/tutor/89598031" target="_blank" rel="noopener">Wyzant</a></span><span class="when">Jan 2026 – now</span></div>
+          <span class="role"><b>AMC, AIME &amp; Computer Science Tutor</b> · Remote</span>
+          <span class="what">425+ hours tutored, with a 5.0 rating across 188 reviews.</span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://hms.harvard.edu" target="_blank" rel="noopener">Harvard Medical School</a> &amp; <a href="https://www.childrenshospital.org" target="_blank" rel="noopener">Boston Children's</a></span><span class="when">Aug 2022 – Jun 2024</span></div>
+          <span class="role"><b>Scientific Programmer</b> · Boston, MA</span>
+          <span class="what">Designed the algorithm the lab used to select HIV vaccine targets; co-authored the resulting paper in <i>Immunity</i>.</span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://www.scripps.edu" target="_blank" rel="noopener">Scripps Research</a></span><span class="when">Jun – Aug 2022</span></div>
+          <span class="role"><b>Kenan Fellow Research Intern</b> · Jupiter, FL</span>
+          <span class="what">Studied protein–lipid behavior to develop antibiotic alternatives.</span>
+        </li>
+      </ul>
+
+      <h2 class="sub-h">Programs</h2>
+      <ul class="jobs">
+        <li>
+          <div class="top"><span class="org"><a href="https://www.startupschool.org" target="_blank" rel="noopener">Y Combinator</a></span><span class="when">Jul 2026</span></div>
+          <span class="role"><b>Startup School</b></span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://www.janestreet.com" target="_blank" rel="noopener">Jane Street</a></span><span class="when">2024 – 2025</span></div>
+          <span class="role"><b>WiSE Multi-Day Program</b> (Jul 2024) · <b>WiSE Reunion</b> (Jul 2025) · <b>NCWIT Visit Day</b> (Apr 2024)</span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://sig.com" target="_blank" rel="noopener">Susquehanna International Group</a></span><span class="when">2024 – 2025</span></div>
+          <span class="role"><b>First Year Discovery Day</b> (Feb 2025) · <b>Women's Discovery Event</b> (Nov 2024)</span>
+        </li>
+      </ul>
+
+      <h2 class="sub-h" id="publications">Publications</h2>
+      <ul class="jobs">
+        <li>
+          <div class="top"><span class="org"><a href="https://doi.org/10.1016/j.immuni.2023.07.003" target="_blank" rel="noopener">Heavy-chain CDR3-engineered B cells facilitate in vivo evaluation of HIV-1 vaccine candidates</a></span></div>
+          <span class="role"><b><i>Immunity</i></b> · 2023 · Co-author</span>
+        </li>
+        <li>
+          <div class="top"><span class="org"><a href="https://journals.library.columbia.edu/index.php/bioethics/en/article/view/11794" target="_blank" rel="noopener">An Exploration of the Effects of Gene-Editing Technology on Human Identity</a></span></div>
+          <span class="role"><b><i>Voices in Bioethics</i></b>, Columbia University · 2023 · Sole author</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- To add a project, copy one whole <div class="tile">...</div> block -->
+    <section id="projects" aria-labelledby="h-projects">
+      <h2 id="h-projects">Projects</h2>
+      <div class="tiles">
+        <div class="tile">
+          <span class="where">Harvard Medical School</span>
+          <h3>Multi-Objective Scoring Antibody Ranking Algorithm</h3>
+          <p>Independently designed an algorithm that ranks 3 billion HIV vaccine target candidates across multiple scoring objectives. It replaced manual selection, cut analysis time from weeks to minutes, and informed a study published in <i>Immunity</i>.</p>
+          <ul class="chips"><li>Python</li><li>Algorithm design</li><li>Multi-objective optimization</li><li>Ranking systems</li><li>Scoring functions</li><li>Large-scale data processing</li><li>Performance optimization</li><li>Data structures</li></ul>
+        </div>
+        <div class="tile">
+          <span class="where">Broad Institute</span>
+          <h3>Gaussian Process Regression for Antibody Neutralization Prediction</h3>
+          <p>Built an end-to-end pipeline for low signal-to-noise data that predicts antibody neutralization across 2,600+ HIV variants, outperforming baseline neural networks.</p>
+          <ul class="chips"><li>Python</li><li>Gaussian processes</li><li>Bayesian inference</li><li>Kernel methods</li><li>Regression</li><li>Uncertainty quantification</li><li>End-to-end ML pipelines</li><li>Data preprocessing</li><li>Model evaluation</li><li>NumPy</li><li>pandas</li></ul>
+        </div>
+        <div class="tile">
+          <span class="where">Broad Institute</span>
+          <h3>Autoregressive Decoding Improvements for ProteinMPNN</h3>
+          <p>Redesigned the decoding algorithm of a deep protein design model with alternative decoding orders, a second-pass redesign, and uncertainty-guided residue updates, raising sequence recovery by about 2%.</p>
+          <ul class="chips"><li>Python</li><li>PyTorch</li><li>Deep learning</li><li>Graph neural networks</li><li>Autoregressive models</li><li>Decoding algorithms</li><li>Uncertainty estimation</li><li>Model evaluation</li></ul>
+        </div>
+        <div class="tile">
+          <span class="where">Broad Institute</span>
+          <h3>Graph-Theoretic Analysis of Protein Sequence Design with Potts Models</h3>
+          <p>Analyzing how the size and structure of synthetic and protein-derived interaction graphs affect treewidth, and with it the tractability of exact Potts model optimization.</p>
+          <ul class="chips"><li>Python</li><li>Graph theory</li><li>Graph algorithms</li><li>Treewidth</li><li>Combinatorial optimization</li><li>Computational complexity</li><li>Probabilistic graphical models</li><li>Exact solvers</li><li>NetworkX</li></ul>
+        </div>
+        <div class="tile">
+          <span class="where">Personal project</span>
+          <h3>Ballet Pose Analysis &amp; Technique Evaluation</h3>
+          <p>Built a pose-estimation pipeline that extracts body landmarks from ballet images and computes joint angles, then designed a geometry-based framework that scores arabesque technique on 15+ criteria.</p>
+          <ul class="chips"><li>Python</li><li>Computer vision</li><li>Pose estimation</li><li>MediaPipe</li><li>OpenCV</li><li>Computational geometry</li><li>Feature engineering</li><li>Scoring systems</li></ul>
+        </div>
+        <div class="tile">
+          <span class="where">Scripps Research</span>
+          <h3>HDX-MS Analysis of Protein–Lipid Behavior</h3>
+          <p>Analyzed 3,600+ hydrogen–deuterium exchange uptake graphs to characterize protein conformation, supporting work on antibiotic alternatives. Presented the results to 500 scientists.</p>
+          <ul class="chips"><li>Data analysis</li><li>Scientific computing</li><li>Statistical analysis</li><li>Data visualization</li><li>Research communication</li></ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== AWARDS / ACTIVITIES / SCORES ===== -->
+  <div class="lists">
+    <section id="awards" aria-labelledby="h-awards">
+      <h2 id="h-awards">Awards</h2>
+      <ul class="rows">
+        <li><span class="t">Regeneron ISEF Finalist</span><span class="d">Mathematics &amp; Computational Science</span></li>
+        <li><span class="t">NCWIT Aspirations in Computing</span><span class="d">National Award Winner</span></li>
+        <li><span class="t">Pathfinder Award in Science</span><span class="d">1st place, recognized in U.S. Congress</span></li>
+        <li><span class="t">Women at Microsoft Scholar</span></li>
+        <li><span class="t">Accenture Navisite Next Steminist Scholar</span></li>
+        <li><span class="t">National Merit Finalist</span></li>
+      </ul>
+    </section>
+
+    <section id="activities" aria-labelledby="h-activities">
+      <h2 id="h-activities">Activities</h2>
+      <ul class="rows">
+        <li><span class="t">Stanford ICPC Team</span><span class="d">Competitive programming</span></li>
+        <li><span class="t">Stanford Math Tournament</span><span class="d">Problem writer</span></li>
+        <li><span class="t">Women in Computer Science (WiCS)</span><span class="d">Member</span></li>
+        <li><span class="t">Association for Computing Machinery (ACM)</span><span class="d">Member</span></li>
+      </ul>
+    </section>
+
+    <section id="scores" aria-labelledby="h-scores">
+      <h2 id="h-scores">Scores</h2>
+      <ul class="rows">
+        <li><span class="t">CodeSignal General Coding Assessment</span><span class="d">600 / 600</span></li>
+        <li><span class="t">SAT</span><span class="d">1600 / 1600</span></li>
+      </ul>
+    </section>
+
+
+
+  </div>
+
+  <!-- ===== CONTACT ===== -->
+  <div class="contact" id="contact">
+    <p>Email: <span class="addr">avaallwardt@gmail.com</span></p>
+    <p><a href="https://www.linkedin.com/in/ava-allwardt-b94610287/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/avaallwardt" target="_blank" rel="noopener">GitHub</a> · <a href="https://scholar.google.com/citations?user=IyWtjPkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
+  </div>
+
+</div>
+</body>
+</html>
