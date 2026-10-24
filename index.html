@@ -51,10 +51,12 @@ nav a:hover { color: var(--accent); }
 nav .home { color: var(--fg); font-weight: 600; margin-right: auto; }
 
 /* Hello: text on the left, photo on the right */
-.hello { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 48px; align-items: center; }
+.hello { display: grid; grid-template-columns: minmax(0, 72ch) minmax(0, 1fr); gap: 40px; align-items: center; }
+.hello .photo { width: 250px; justify-self: center; }
 .hello h1 { font-family: var(--display); font-weight: 500; font-size: 42px; line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
-.hello p { margin: 0 0 10px; max-width: 80ch; }
-.hello ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; max-width: 90ch; }
+.hello p { margin: 0 0 10px; text-wrap: pretty; }
+.hello ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.hello li { text-wrap: pretty; }
 .profiles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .profiles a { font-size: 13.5px; font-weight: 500; text-decoration: none; padding: 4px 14px; border-radius: 999px; border: 1px solid var(--rule); color: var(--fg); }
 .profiles a:hover { border-color: var(--accent); color: var(--accent); }
@@ -78,14 +80,18 @@ h2 { font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing
 .when { font-family: var(--mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.tile { background: var(--surface); border-radius: 8px; padding: 14px 16px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 5px; }
+.tile { background: var(--surface); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 5px; }
+.tile .chips { margin-top: auto; padding-top: 6px; }
 .tile .where { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .tile h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; }
 .tile p { margin: 0; font-size: 14px; }
 .chips { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; margin: 6px 0 0; padding: 0; align-self: end; }
 .chips li { font-size: 11.5px; line-height: 1.5; padding: 1px 9px; border-radius: 999px; border: 1px solid var(--rule); background: var(--bg); color: var(--fg); white-space: nowrap; }
 .tile.wide { grid-column: 1 / -1; }
+.tile.featured { padding: 20px 22px; border: 1px solid var(--rule); }
+.tile .subtitle { color: var(--muted); font-size: 14px; margin-top: -2px; }
 .tile .code { font-size: 13px; font-weight: 500; text-decoration: none; margin-top: 4px; }
+.tile .links-row { display: flex; flex-wrap: wrap; gap: 6px 20px; }
 .tile .code:hover { text-decoration: underline; }
 .skillgroups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 40px; }
 .skillgroups div { display: grid; gap: 8px; align-content: start; }
@@ -115,7 +121,7 @@ h2.sub-h { margin-top: 14px; }
   .page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 56px; gap: 40px; }
   nav .home { flex-basis: 100%; }
   .hello { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .hello .photo { width: 150px; grid-row: 1; }
+  .hello .photo { width: 150px; grid-row: 1; justify-self: start; }
   .hello h1 { font-size: 34px; }
   .tiles, .lists, .skillgroups { grid-template-columns: minmax(0, 1fr); }
 }
@@ -154,7 +160,7 @@ h2.sub-h { margin-top: 14px; }
         <li>I lead machine learning research at the <a href="https://www.broadinstitute.org" target="_blank" rel="noopener">Broad Institute of MIT and Harvard</a>.</li>
         <li>I developed an antibody-ranking algorithm for HIV vaccine development that launched a study published in <a href="https://doi.org/10.1016/j.immuni.2023.07.003" target="_blank" rel="noopener"><i>Immunity</i></a>.</li>
         <li>I love teaching and have spent 425+ hours tutoring AMC/AIME and computer science on <a href="https://www.wyzant.com/match/tutor/89598031" target="_blank" rel="noopener">Wyzant</a> with a perfect 5.0/5.0 rating.</li>
-        <li>I've trained in classical ballet for 12 years. As a personal project, I developed a <a href="#projects">geometry-based framework for analyzing arabesque technique</a>.</li>
+        <li>I've trained in classical ballet for 12 years. As a personal project, I developed a <a href="https://avaallwardt.github.io/G-BALLET/" target="_blank" rel="noopener">geometry-based framework for analyzing ballet arabesque technique</a>.</li>
       </ul>
       <!-- Profile links -->
       <div class="profiles">
@@ -238,38 +244,39 @@ h2.sub-h { margin-top: 14px; }
     <section id="projects" aria-labelledby="h-projects">
       <h2 id="h-projects">Projects</h2>
       <div class="tiles">
-        <div class="tile wide">
+        <div class="tile wide featured">
+          <span class="where">Personal project</span>
+          <h3>G-BALLET: Geometry-Based Analysis of Landmarks &amp; Lines for Enhancing Technique</h3>
+          <span class="subtitle">Ballet Pose Analysis &amp; Technique Evaluation</span>
+          <p>Built a MediaPipe-based pipeline to extract pose landmarks from ballet images and compute joint-angle metrics. Developed a novel geometry-based framework to score classical ballet arabesque technique across 15+ criteria.</p>
+          <ul class="chips"><li>Python</li><li>MediaPipe</li><li>OpenCV</li></ul>
+          <div class="links-row"><a class="code" href="https://avaallwardt.github.io/G-BALLET/" target="_blank" rel="noopener">Try it live →</a><a class="code" href="https://github.com/avaallwardt/G-BALLET" target="_blank" rel="noopener">View code →</a></div>
+        </div>
+        <div class="tile">
           <span class="where">Harvard Medical School</span>
           <h3>Multi-Objective Scoring Antibody Ranking Algorithm</h3>
-          <p>I translated what makes an antibody a promising HIV vaccine target into a set of scoring rules, then combined them into a single ranking over about 3 billion candidates. The hard part was the formulation: deciding what to score and how to weigh competing objectives. It replaced manual selection, and its output informed a study published in <i>Immunity</i>.</p>
-          <ul class="chips"><li>Python</li><li>Algorithm design</li><li>Ranking</li></ul>
+          <p>Independently created a novel algorithm ranking 3 billion HIV vaccine targets using multi-objective scoring. Replaced manual vaccine target selection and reduced analysis time from weeks to minutes. Algorithm outputs informed a research study published in <i>Immunity</i>.</p>
+          <ul class="chips"><li>Java</li><li>Algorithm design</li><li>Ranking</li></ul>
           <!-- Code link: <a class="code" href="PASTE-GITHUB-LINK" target="_blank" rel="noopener">View code →</a> -->
         </div>
         <div class="tile">
           <span class="where">Broad Institute</span>
           <h3>Gaussian Process Regression for Antibody Neutralization Prediction</h3>
-          <p>A Gaussian process regression model, developed in Jupyter, that predicts antibody neutralization across 2,600+ HIV variants from noisy measurements. It outperformed the neural network baselines we compared it against.</p>
-          <ul class="chips"><li>Python</li><li>Gaussian processes</li><li>Jupyter</li></ul>
-          <!-- Code link: <a class="code" href="PASTE-GITHUB-LINK" target="_blank" rel="noopener">View code →</a> -->
+          <p>Built an end-to-end Gaussian Process Regression pipeline for low signal-to-noise biological data, predicting antibody neutralization across 2,600+ HIV variants and outperforming baseline neural networks.</p>
+          <ul class="chips"><li>Python</li><li>Gaussian processes</li><li>scikit-learn</li></ul>
+          <a class="code" href="https://github.com/avaallwardt/GPR-IC50-Prediction" target="_blank" rel="noopener">View code →</a>
         </div>
         <div class="tile">
           <span class="where">Broad Institute</span>
           <h3>Autoregressive Decoding Improvements for ProteinMPNN</h3>
-          <p>Contributed to changes in how the ProteinMPNN protein design model decodes sequences, including alternative decoding orders and a second-pass redesign step. Together they improved sequence recovery by about 2% in our experiments.</p>
+          <p>Improved ProteinMPNN's autoregressive decoding algorithm by introducing alternative decoding orders, a second-pass redesign, and uncertainty-guided residue updates, increasing sequence recovery by ~2%.</p>
           <ul class="chips"><li>Python</li><li>PyTorch</li><li>Deep learning</li></ul>
         </div>
         <div class="tile">
           <span class="where">Broad Institute</span>
           <h3>Graph-Theoretic Analysis of Protein Sequence Design with Potts Models</h3>
-          <p>Studying how the size and structure of interaction graphs affect their treewidth, which determines when exact Potts model optimization is tractable. I build graphs from protein structure files and synthetic models, and estimate their treewidth in Python.</p>
+          <p>Analyzed how synthetic and protein-derived interaction graph size and structure affect estimated treewidth and the tractability of exact Potts model optimization.</p>
           <ul class="chips"><li>Python</li><li>NetworkX</li><li>Graph algorithms</li></ul>
-          <!-- Code link: <a class="code" href="PASTE-GITHUB-LINK" target="_blank" rel="noopener">View code →</a> -->
-        </div>
-        <div class="tile">
-          <span class="where">Personal project</span>
-          <h3>Ballet Pose Analysis &amp; Technique Evaluation</h3>
-          <p>Uses pose estimation to find body landmarks in ballet photos and compute joint angles, then scores arabesque technique against 15+ geometric criteria I defined from 12 years of training.</p>
-          <ul class="chips"><li>Python</li><li>MediaPipe</li><li>OpenCV</li></ul>
           <!-- Code link: <a class="code" href="PASTE-GITHUB-LINK" target="_blank" rel="noopener">View code →</a> -->
         </div>
       </div>
